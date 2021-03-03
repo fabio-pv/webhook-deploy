@@ -20,4 +20,6 @@ use App\Http\Controllers\v1\RepositoryController;
 Route::post('v1/login', [AuthController::class, 'login']);
 
 Route::apiResource('v1/project', ProjectController::class);
+
 Route::apiResource('v1/repository', RepositoryController::class);
+Route::post('v1/repository/{uuid}/do-clone', [RepositoryController::class, 'doClone']);
