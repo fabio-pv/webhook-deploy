@@ -54,15 +54,13 @@ class RepositoryController extends BaseController
 
             $this->hasPermissonSet();
             $this->validation->validate($request, __FUNCTION__);
-            $this->retrive = $this->service->retrieveEnv($uuid);
-
-            $response = fractal($this->retrive, $this->transformer);
+            $this->retrive['data']['env'] = $this->service->retrieveEnv($uuid);
 
         } catch (\Exception $e) {
             throw $e;
         }
 
-        return response_default($response, StatusCodeUtil::CREATED);
+        return response_default($this->retrive, StatusCodeUtil::CREATED);
     }
 
     public function doCreateEnv(Request $request, string $uuid): JsonResponse

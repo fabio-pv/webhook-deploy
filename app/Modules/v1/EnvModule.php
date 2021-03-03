@@ -17,9 +17,10 @@ class EnvModule
         $this->repository = $repository;
     }
 
-    public function startGet(): void
+    public function startGet(): array
     {
         $this->existEnv();
+        return $this->getEnv();
     }
 
     public function startCreate(): void
@@ -34,6 +35,19 @@ class EnvModule
         if (!file_exists($fileName)) {
             throw new ValidationException('env file not exist');
         }
+    }
+
+    private function getEnv(): array
+    {
+        $fileName = PathUtil::getFullPathRepositoryWithFile($this->repository, '.env');
+        $envRaw = file_get_contents($fileName);
+
+        return $this->formatEnv($envRaw);
+    }
+
+    private function formatEnv(string $envRaw): array
+    {
+        return explode(PHP_EOL, $envRaw);
     }
 
     private function createEnv(): void

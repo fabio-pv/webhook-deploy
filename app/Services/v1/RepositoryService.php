@@ -28,7 +28,7 @@ class RepositoryService extends BaseService
         }
     }
 
-    public function retrieveEnv(string $uuid): Repository
+    public function retrieveEnv(string $uuid): array
     {
         try {
             /**
@@ -36,9 +36,7 @@ class RepositoryService extends BaseService
              */
             $repositoryModel = Repository::findByUuid($uuid, true);
             $getEnvModule = new EnvModule($repositoryModel);
-            $getEnvModule->startGet();
-
-            return $repositoryModel;
+            return $getEnvModule->startGet();
 
         } catch (\Exception $e) {
             throw $e;
