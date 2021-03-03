@@ -4,6 +4,8 @@
 namespace App\Utils;
 
 
+use App\Jobs\ExecCommand;
+
 class ExecCommandUtil
 {
     private $dir;
@@ -18,7 +20,7 @@ class ExecCommandUtil
         $moveDir = 'cd ' . $this->dir . ' && ';
         $command = $moveDir . $command;
 
-        exec($command, $result);
+        ExecCommand::dispatch($command);
 
         return $this;
     }
