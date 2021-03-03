@@ -26,4 +26,14 @@ class RepositoryService extends BaseService
             throw $e;
         }
     }
+
+    public function retriveEnv(string $uuid)
+    {
+        /**
+         * @var Repository $repositoryModel
+         */
+        $repositoryModel = Repository::findByUuid($uuid, true);
+
+        dd($repositoryModel);
+    }
 }

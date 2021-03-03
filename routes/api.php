@@ -23,3 +23,4 @@ Route::apiResource('v1/project', ProjectController::class);
 
 Route::apiResource('v1/repository', RepositoryController::class);
 Route::post('v1/repository/{uuid}/do-clone', [RepositoryController::class, 'doClone']);
+Route::get('v1/respository/{uuid}/get-env', [RepositoryController::class, 'getEnv']);
