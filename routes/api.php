@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\v1\AuthController;
 use App\Http\Controllers\v1\ProjectController;
+use App\Http\Controllers\v1\RepositoryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,3 +20,4 @@ use App\Http\Controllers\v1\ProjectController;
 Route::post('v1/login', [AuthController::class, 'login']);
 
 Route::apiResource('v1/project', ProjectController::class);
+Route::apiResource('v1/repository', RepositoryController::class);
