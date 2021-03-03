@@ -10,14 +10,20 @@ use LaravelSimpleBases\Services\BaseService;
 
 class RepositoryService extends BaseService
 {
-
-    public function clone(array $data, string $uuid)
+    public function clone(string $uuid): Repository
     {
-        /**
-         * @var Repository $repositoryModel
-         */
-        $repositoryModel = Repository::findByUuid($uuid, true);
-        $cloneModule = new CloneModule($repositoryModel);
-        $cloneModule->start();
+        try {
+            /**
+             * @var Repository $repositoryModel
+             */
+            $repositoryModel = Repository::findByUuid($uuid, true);
+            $cloneModule = new CloneModule($repositoryModel);
+            $cloneModule->start();
+
+            return $repositoryModel;
+
+        } catch (\Exception $e) {
+            throw $e;
+        }
     }
 }

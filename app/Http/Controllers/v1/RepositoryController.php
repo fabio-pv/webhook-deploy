@@ -27,7 +27,8 @@ class RepositoryController extends BaseController
 
     /**
      * @param Request $request
-     * @return \Illuminate\Http\JsonResponse
+     * @param string $uuid
+     * @return JsonResponse
      * @throws \Exception
      */
     public function doClone(Request $request, string $uuid): JsonResponse
@@ -36,8 +37,7 @@ class RepositoryController extends BaseController
 
             $this->hasPermissonSet();
             $this->validation->validate($request, __FUNCTION__);
-            $data = $request->all();
-            $this->retrive = $this->service->clone($data, $uuid);
+            $this->retrive = $this->service->clone($uuid);
 
             $response = fractal($this->retrive, $this->transformer);
 
