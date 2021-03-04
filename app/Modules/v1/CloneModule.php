@@ -29,7 +29,7 @@ class CloneModule
             return;
         }
 
-        mkdir($this->repository->project->directory, 0755);
+        mkdir($this->repository->project->directory, 0755, true);
     }
 
     private function doClone(): void

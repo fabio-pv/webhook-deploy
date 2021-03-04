@@ -25,6 +25,7 @@ class EnvModule
 
     public function startCreate(): void
     {
+        $this->existDir();
         $this->createEnv();
     }
 
@@ -48,6 +49,15 @@ class EnvModule
     private function formatEnv(string $envRaw): array
     {
         return explode(PHP_EOL, $envRaw);
+    }
+
+    private function existDir(): void
+    {
+        $dir = PathUtil::getFullPathRepository($this->repository);
+
+        if (!is_dir($dir)) {
+            throw new ValidationException('Directory does not exist yet use the clone function to create.');
+        }
     }
 
     private function createEnv(): void
