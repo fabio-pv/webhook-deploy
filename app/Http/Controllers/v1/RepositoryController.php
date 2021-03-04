@@ -80,4 +80,21 @@ class RepositoryController extends BaseController
         return response_default($response, StatusCodeUtil::CREATED);
     }
 
+    public function doCreateCommand(Request $request, string $uuid): JsonResponse
+    {
+        try {
+
+            $this->hasPermissonSet();
+            $this->validation->validate($request, __FUNCTION__);
+            $this->retrive = $this->service->createCommand($uuid);
+
+            $response = fractal($this->retrive, $this->transformer);
+
+        } catch (\Exception $e) {
+            throw $e;
+        }
+
+        return response_default($response, StatusCodeUtil::CREATED);
+    }
+
 }

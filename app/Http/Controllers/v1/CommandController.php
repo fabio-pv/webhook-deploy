@@ -6,6 +6,9 @@ use App\Http\Validations\v1\CommandValidation;
 use App\Models\v1\Command;
 use App\Services\v1\CommandService;
 use App\Transformers\v1\CommandTransformer;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
+use LaravelSimpleBases\Exceptions\MethodNotAllowException;
 use LaravelSimpleBases\Http\Controllers\BaseController;
 
 class CommandController extends BaseController
@@ -21,4 +24,26 @@ class CommandController extends BaseController
         $this->transformer = $commandTransformer;
         $this->validation = $commandValidation;
     }
+
+
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse|void
+     * @throws MethodNotAllowException
+     */
+    public function store(Request $request): JsonResponse
+    {
+        throw new MethodNotAllowException();
+    }
+
+    /**
+     * @param $uuid
+     * @return \Illuminate\Http\JsonResponse|void
+     * @throws MethodNotAllowException
+     */
+    public function destroy($uuid): JsonResponse
+    {
+        throw new MethodNotAllowException();
+    }
+
 }

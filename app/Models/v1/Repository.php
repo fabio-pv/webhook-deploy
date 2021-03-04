@@ -16,12 +16,13 @@ use LaravelSimpleBases\Models\ModelBase;
  * @property string $updated_at
  * @property string $deleted_at
  * @property Project $project
+ * @property Command[] $commands
  */
 class Repository extends ModelBase
 {
     /**
      * The "type" of the auto-incrementing ID.
-     * 
+     *
      * @var string
      */
     protected $keyType = 'integer';
@@ -37,5 +38,16 @@ class Repository extends ModelBase
     public function project()
     {
         return $this->belongsTo('App\Models\v1\Project');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function commands()
+    {
+        return $this->belongsToMany(
+            'App\Models\v1\Command',
+            'repository_command'
+        );
     }
 }

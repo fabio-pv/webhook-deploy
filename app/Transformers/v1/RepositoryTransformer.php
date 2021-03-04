@@ -43,7 +43,11 @@ class RepositoryTransformer extends TransformerAbstract
                 ProjectTransformer::class,
                 null
             ),
-
+            'commands' => fractal_transformer(
+                $repository->commands,
+                CommandTransformer::class,
+                null
+            )
         ];
     }
 }

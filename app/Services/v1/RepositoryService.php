@@ -9,8 +9,23 @@ use App\Modules\v1\CloneModule;
 use App\Modules\v1\EnvModule;
 use LaravelSimpleBases\Services\BaseService;
 
+/**
+ * Class RepositoryService
+ * @package App\Services\v1
+ *
+ * @property Repository $model
+ */
 class RepositoryService extends BaseService
 {
+    public function __construct($model)
+    {
+        parent::__construct($model);
+
+        if (!empty(request()->uuid)) {
+            $this->model = Repository::findByUuid(request()->uuid, true);
+        }
+    }
+
     public function clone(string $uuid): Repository
     {
         try {
@@ -54,6 +69,23 @@ class RepositoryService extends BaseService
             $getEnvModule->startCreate();
 
             return $repositoryModel;
+
+        } catch (\Exception $e) {
+            throw $e;
+        }
+    }
+
+    public function createCommand(string $uuid): Repository
+    {
+        try {
+
+            $data = request()->all();
+
+            $this->model
+                ->commands()
+                ->create($data);
+
+            return $this->model;
 
         } catch (\Exception $e) {
             throw $e;
