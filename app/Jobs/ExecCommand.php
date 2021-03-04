@@ -32,5 +32,6 @@ class ExecCommand implements ShouldQueue
     public function handle()
     {
         exec($this->command, $result);
+        echo 'teste';
     }
 }

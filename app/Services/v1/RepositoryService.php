@@ -7,6 +7,7 @@ namespace App\Services\v1;
 use App\Models\v1\Repository;
 use App\Modules\v1\CloneModule;
 use App\Modules\v1\EnvModule;
+use App\Modules\v1\ExecuteCommandModule;
 use LaravelSimpleBases\Services\BaseService;
 
 /**
@@ -26,31 +27,23 @@ class RepositoryService extends BaseService
         }
     }
 
-    public function clone(string $uuid): Repository
+    public function clone(): Repository
     {
         try {
-            /**
-             * @var Repository $repositoryModel
-             */
-            $repositoryModel = Repository::findByUuid($uuid, true);
-            $cloneModule = new CloneModule($repositoryModel);
+            $cloneModule = new CloneModule($this->model);
             $cloneModule->start();
 
-            return $repositoryModel;
+            return $this->model;
 
         } catch (\Exception $e) {
             throw $e;
         }
     }
 
-    public function retrieveEnv(string $uuid): array
+    public function retrieveEnv(): array
     {
         try {
-            /**
-             * @var Repository $repositoryModel
-             */
-            $repositoryModel = Repository::findByUuid($uuid, true);
-            $getEnvModule = new EnvModule($repositoryModel);
+            $getEnvModule = new EnvModule($this->model);
             return $getEnvModule->startGet();
 
         } catch (\Exception $e) {
@@ -58,24 +51,20 @@ class RepositoryService extends BaseService
         }
     }
 
-    public function createEnv(string $uuid): Repository
+    public function createEnv(): Repository
     {
         try {
-            /**
-             * @var Repository $repositoryModel
-             */
-            $repositoryModel = Repository::findByUuid($uuid, true);
-            $getEnvModule = new EnvModule($repositoryModel);
+            $getEnvModule = new EnvModule($this->model);
             $getEnvModule->startCreate();
 
-            return $repositoryModel;
+            return $this->model;
 
         } catch (\Exception $e) {
             throw $e;
         }
     }
 
-    public function createCommand(string $uuid): Repository
+    public function createCommand(): Repository
     {
         try {
 
@@ -84,6 +73,20 @@ class RepositoryService extends BaseService
             $this->model
                 ->commands()
                 ->create($data);
+
+            return $this->model;
+
+        } catch (\Exception $e) {
+            throw $e;
+        }
+    }
+
+    public function executeCommands(): Repository
+    {
+        try {
+
+            $executeCommandModule = new ExecuteCommandModule($this->model);
+            $executeCommandModule->start();
 
             return $this->model;
 
