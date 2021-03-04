@@ -8,7 +8,6 @@ use App\Jobs\ExecCommand;
 use App\Models\v1\Command;
 use App\Models\v1\Repository;
 use App\Utils\CommandUtil;
-use App\Utils\PathUtil;
 
 class ExecuteCommandModule
 {
