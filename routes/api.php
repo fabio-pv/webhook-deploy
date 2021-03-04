@@ -28,4 +28,6 @@ Route::group(['middleware' => ['check.auth']], function () {
     Route::get('v1/respository/{uuid}/get-env', [RepositoryController::class, 'getEnv']);
     Route::post('v1/respository/{uuid}/do-create-env', [RepositoryController::class, 'doCreateEnv']);
 
+    Route::apiResource('v1/command', \App\Http\Controllers\v1\CommandController::class);
+
 });
