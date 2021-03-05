@@ -4,6 +4,7 @@
 namespace App\Modules\v1;
 
 
+use App\Jobs\FilePutContentsCommand;
 use App\Models\v1\Repository;
 use App\Utils\PathUtil;
 use LaravelSimpleBases\Exceptions\ValidationException;
@@ -65,6 +66,6 @@ class EnvModule
         $fileName = PathUtil::getFullPathRepositoryWithFile($this->repository, '.env');
         $data = request()->get('env');
 
-        file_put_contents($fileName, $data);
+        FilePutContentsCommand::dispatch($fileName, $data);
     }
 }

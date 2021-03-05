@@ -4,6 +4,7 @@
 namespace App\Modules\v1;
 
 
+use App\Jobs\MKDIRCommand;
 use App\Models\v1\Repository;
 use App\Utils\CommandUtil;
 use App\Utils\ExecCommandUtil;
@@ -29,7 +30,7 @@ class CloneModule
             return;
         }
 
-        mkdir($this->repository->project->directory, 0755, true);
+        MKDIRCommand::dispatch($this->repository->project->directory, 0755, true);
     }
 
     private function doClone(): void
