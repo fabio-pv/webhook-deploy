@@ -21,10 +21,16 @@ class DeployModule
 
     public function start()
     {
-        $this->verifySecret();
-        $this->verifyEnableDeploy();
-        $this->verifyBranch();
-        $this->executeCommands();
+        try {
+
+            $this->verifySecret();
+            $this->verifyEnableDeploy();
+            $this->verifyBranch();
+            $this->executeCommands();
+
+        } catch (\Exception $e) {
+            throw $e;
+        }
     }
 
     private function verifySecret()
