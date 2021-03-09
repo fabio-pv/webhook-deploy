@@ -21,9 +21,34 @@ class DeployModule
 
     public function start()
     {
+        $this->verifySecret();
         $this->verifyEnableDeploy();
         $this->verifyBranch();
         $this->executeCommands();
+    }
+
+    private function verifySecret()
+    {
+
+        $rawPost = file_get_contents('php://input');
+        $payloadHash = 'sha256='
+            . hash_hmac(
+                'sha256',
+                $rawPost,
+                $this->repository->secret,
+                false
+            );
+        $hash = \request()->header('X-Hub-Signature-256');
+
+        $result = hash_equals(
+            $payloadHash,
+            $hash
+        );
+
+        if ($result !== true) {
+            throw new ValidationException('Wrong secret');
+        }
+
     }
 
     private function verifyEnableDeploy()
