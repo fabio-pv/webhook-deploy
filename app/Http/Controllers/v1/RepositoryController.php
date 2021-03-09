@@ -27,17 +27,16 @@ class RepositoryController extends BaseController
 
     /**
      * @param Request $request
-     * @param string $uuid
      * @return JsonResponse
      * @throws \Exception
      */
-    public function doClone(Request $request, string $uuid): JsonResponse
+    public function doClone(Request $request): JsonResponse
     {
         try {
 
             $this->hasPermissonSet();
             $this->validation->validate($request, __FUNCTION__);
-            $this->retrive = $this->service->clone($uuid);
+            $this->retrive = $this->service->clone();
 
             $response = fractal($this->retrive, $this->transformer);
 
@@ -48,13 +47,18 @@ class RepositoryController extends BaseController
         return response_default($response, StatusCodeUtil::CREATED);
     }
 
-    public function getEnv(Request $request, string $uuid): JsonResponse
+    /**
+     * @param Request $request
+     * @return JsonResponse
+     * @throws \Exception
+     */
+    public function getEnv(Request $request): JsonResponse
     {
         try {
 
             $this->hasPermissonSet();
             $this->validation->validate($request, __FUNCTION__);
-            $this->retrive['data']['env'] = $this->service->retrieveEnv($uuid);
+            $this->retrive['data']['env'] = $this->service->retrieveEnv();
 
         } catch (\Exception $e) {
             throw $e;
@@ -63,13 +67,18 @@ class RepositoryController extends BaseController
         return response_default($this->retrive, StatusCodeUtil::CREATED);
     }
 
-    public function doCreateEnv(Request $request, string $uuid): JsonResponse
+    /**
+     * @param Request $request
+     * @return JsonResponse
+     * @throws \Exception
+     */
+    public function doCreateEnv(Request $request): JsonResponse
     {
         try {
 
             $this->hasPermissonSet();
             $this->validation->validate($request, __FUNCTION__);
-            $this->retrive = $this->service->createEnv($uuid);
+            $this->retrive = $this->service->createEnv();
 
             $response = fractal($this->retrive, $this->transformer);
 
@@ -80,13 +89,18 @@ class RepositoryController extends BaseController
         return response_default($response, StatusCodeUtil::CREATED);
     }
 
-    public function doCreateCommand(Request $request, string $uuid): JsonResponse
+    /**
+     * @param Request $request
+     * @return JsonResponse
+     * @throws \Exception
+     */
+    public function doCreateCommand(Request $request): JsonResponse
     {
         try {
 
             $this->hasPermissonSet();
             $this->validation->validate($request, __FUNCTION__);
-            $this->retrive = $this->service->createCommand($uuid);
+            $this->retrive = $this->service->createCommand();
 
             $response = fractal($this->retrive, $this->transformer);
 
@@ -97,7 +111,12 @@ class RepositoryController extends BaseController
         return response_default($response, StatusCodeUtil::CREATED);
     }
 
-    public function doExecuteCommands(Request $request, string $uuid): JsonResponse
+    /**
+     * @param Request $request
+     * @return JsonResponse
+     * @throws \Exception
+     */
+    public function doExecuteCommands(Request $request): JsonResponse
     {
         try {
 
