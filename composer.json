@@ -1,10 +1,20 @@
 {
-    "name": "laravel/laravel",
-    "type": "project",
-    "description": "The Laravel Framework.",
+    "version": "0.0.1",
+    "name": "fabio/webhook-deploy",
+    "description": "...",
+    "homepage": "https://github.com/fabio-pv/webhook-deploy",
     "keywords": [
-        "framework",
-        "laravel"
+        "fabio-pv",
+        "deploy",
+        "webhook"
+    ],
+    "authors": [
+        {
+            "name": "Fábio Pacheco",
+            "email": "fabiopv1994@gmail.com",
+            "homepage": "https://github.com/fabio-pv",
+            "role": "Developer"
+        }
     ],
     "license": "MIT",
     "require": {
