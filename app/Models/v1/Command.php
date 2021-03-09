@@ -12,6 +12,8 @@ use LaravelSimpleBases\Models\ModelBase;
  * @property string $created_at
  * @property string $updated_at
  * @property string $deleted_at
+ * @property integer $position
+ * @property Repository[] $repositories
  */
 class Command extends ModelBase
 {
@@ -25,6 +27,13 @@ class Command extends ModelBase
     /**
      * @var array
      */
-    protected $fillable = ['uuid', 'name', 'command', 'created_at', 'updated_at', 'deleted_at'];
+    protected $fillable = ['uuid', 'name', 'command', 'created_at', 'updated_at', 'deleted_at', 'position'];
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function repositories()
+    {
+        return $this->belongsToMany('App\Models\v1\Repository', 'repository_command');
+    }
 }

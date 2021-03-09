@@ -25,7 +25,12 @@ class ExecuteCommandModule
 
     private function executeSequence(): void
     {
-        foreach ($this->repository->commands as $command) {
+        $commands = $this->repository
+            ->commands()
+            ->orderBy('position', 'asc')
+            ->get();
+
+        foreach ($commands as $command) {
             $this->execute($command);
         }
     }

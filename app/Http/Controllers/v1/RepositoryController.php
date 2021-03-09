@@ -132,4 +132,21 @@ class RepositoryController extends BaseController
 
         return response_default($response, StatusCodeUtil::CREATED);
     }
+
+    public function doStartDeploy(Request $request)
+    {
+        try {
+
+            $this->hasPermissonSet();
+            $this->validation->validate($request, __FUNCTION__);
+            $this->retrive = $this->service->startDeploy();
+
+            $response = fractal($this->retrive, $this->transformer);
+
+            return response_default($response, StatusCodeUtil::CREATED);
+
+        } catch (\Exception $e) {
+            throw $e;
+        }
+    }
 }

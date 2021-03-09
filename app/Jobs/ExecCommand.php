@@ -32,7 +32,8 @@ class ExecCommand implements ShouldQueue
     public function handle()
     {
         echo PHP_EOL;
-        echo '... handle ...';
+        echo '***' . $this->command . '***';
+        echo PHP_EOL;
         exec($this->command, $result);
     }
 }

@@ -33,3 +33,5 @@ Route::group(['middleware' => ['check.auth']], function () {
     Route::apiResource('v1/command', \App\Http\Controllers\v1\CommandController::class);
 
 });
+
+Route::post('v1/respository/{uuid}/do-start-deploy', [RepositoryController::class, 'doStartDeploy']);

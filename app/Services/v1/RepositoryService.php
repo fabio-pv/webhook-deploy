@@ -6,6 +6,7 @@ namespace App\Services\v1;
 
 use App\Models\v1\Repository;
 use App\Modules\v1\CloneModule;
+use App\Modules\v1\DeployModule;
 use App\Modules\v1\EnvModule;
 use App\Modules\v1\ExecuteCommandModule;
 use LaravelSimpleBases\Services\BaseService;
@@ -27,6 +28,10 @@ class RepositoryService extends BaseService
         }
     }
 
+    /**
+     * @return Repository
+     * @throws \Exception
+     */
     public function clone(): Repository
     {
         try {
@@ -40,6 +45,10 @@ class RepositoryService extends BaseService
         }
     }
 
+    /**
+     * @return array
+     * @throws \Exception
+     */
     public function retrieveEnv(): array
     {
         try {
@@ -51,6 +60,10 @@ class RepositoryService extends BaseService
         }
     }
 
+    /**
+     * @return Repository
+     * @throws \Exception
+     */
     public function createEnv(): Repository
     {
         try {
@@ -64,6 +77,10 @@ class RepositoryService extends BaseService
         }
     }
 
+    /**
+     * @return Repository
+     * @throws \Exception
+     */
     public function createCommand(): Repository
     {
         try {
@@ -81,12 +98,34 @@ class RepositoryService extends BaseService
         }
     }
 
+    /**
+     * @return Repository
+     * @throws \Exception
+     */
     public function executeCommands(): Repository
     {
         try {
 
             $executeCommandModule = new ExecuteCommandModule($this->model);
             $executeCommandModule->start();
+
+            return $this->model;
+
+        } catch (\Exception $e) {
+            throw $e;
+        }
+    }
+
+    /**
+     * @return Repository
+     * @throws \Exception
+     */
+    public function startDeploy(): Repository
+    {
+        try {
+
+            $deployModule = new DeployModule($this->model);
+            $deployModule->start();
 
             return $this->model;
 

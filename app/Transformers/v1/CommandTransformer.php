@@ -29,13 +29,14 @@ class CommandTransformer extends TransformerAbstract
      * @param Command $command
      * @return array
      */
-    public function transform(Command $command)
+    public function transform(Command $command): array
     {
         return [
 
             'uuid' => $command->uuid,
             'name' => $command->name,
-            'commad' => $command->command,
+            'command' => $command->command,
+            'position' => $command->position,
 
         ];
     }
