@@ -133,7 +133,12 @@ class RepositoryController extends BaseController
         return response_default($response, StatusCodeUtil::CREATED);
     }
 
-    public function doStartDeploy(Request $request)
+    /**
+     * @param Request $request
+     * @return JsonResponse
+     * @throws \Exception
+     */
+    public function doStartDeploy(Request $request) : JsonResponse
     {
         try {
 
