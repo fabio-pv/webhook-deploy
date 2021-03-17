@@ -3,7 +3,6 @@
 namespace App\Models\v1;
 
 use LaravelSimpleBases\Models\ModelAuthenticatableBase;
-use LaravelSimpleBases\Models\ModelBase;
 
 /**
  * @property integer $id

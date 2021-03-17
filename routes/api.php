@@ -21,6 +21,8 @@ Route::post('v1/login', [AuthController::class, 'login']);
 
 Route::group(['middleware' => ['check.auth']], function () {
 
+    Route::apiResource('v1/user', \App\Http\Controllers\v1\UserController::class);
+
     Route::apiResource('v1/project', ProjectController::class);
 
     Route::apiResource('v1/repository', RepositoryController::class);
